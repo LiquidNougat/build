@@ -131,9 +131,14 @@ endef
 
 ifeq ($(TARGET_ARCH),arm)
     ifneq ($(USE_CCACHE),)
-      ccache := $(ANDROID_BUILD_TOP)/prebuilts/misc/$(HOST_PREBUILT_TAG)/ccache/ccache
-      # Check that the executable is here.
-      ccache := $(strip $(wildcard $(ccache)))
+        # Detect if the system already has ccache installed to use instead of the prebuilt
+        ccache := $(shell command -v ccache)
+        ifeq ($(ccache),)
+            ccache := $(ANDROID_BUILD_TOP)/prebuilts/misc/$(HOST_PREBUILT_TAG)/ccache/ccache
+        endif
+        $(info Using '$(ccache)' binary on '$(HOST_PREBUILT_TAG)')
+        # Check that the executable is here.
+        ccache := $(strip $(wildcard $(ccache)))
     endif
     ifneq ($(TARGET_GCC_VERSION_ARM),)
       ifeq ($(HOST_OS),darwin)
@@ -144,14 +149,18 @@ ifeq ($(TARGET_ARCH),arm)
     else
       ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ARM_EABI_TOOLCHAIN)/arm-eabi-"
     endif
-    ccache = 
 endif
 
 ifeq ($(TARGET_ARCH),arm64)
     ifneq ($(USE_CCACHE),)
-      ccache := $(ANDROID_BUILD_TOP)/prebuilts/misc/$(HOST_PREBUILT_TAG)/ccache/ccache
-      # Check that the executable is here.
-      ccache := $(strip $(wildcard $(ccache)))
+        # Detect if the system already has ccache installed to use instead of the prebuilt
+        ccache := $(shell command -v ccache)
+        ifeq ($(ccache),)
+            ccache := $(ANDROID_BUILD_TOP)/prebuilts/misc/$(HOST_PREBUILT_TAG)/ccache/ccache
+        endif
+        $(info Using '$(ccache)' binary on '$(HOST_PREBUILT_TAG)')
+        # Check that the executable is here.
+        ccache := $(strip $(wildcard $(ccache)))
     endif
     ifneq ($(TARGET_GCC_VERSION_ARM64),)
       ifeq ($(HOST_OS),darwin)
@@ -162,7 +171,6 @@ ifeq ($(TARGET_ARCH),arm64)
     else
       ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ARM_EABI_TOOLCHAIN)/aarch64-linux-android-"
     endif
-    ccache = 
 endif
 
 ifeq ($(HOST_OS),darwin)
