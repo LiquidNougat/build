@@ -53,7 +53,6 @@ PRODUCT_PACKAGES += \
     libcameraservice \
     libcamera2ndk \
     libdl \
-    libdrmclearkeyplugin \
     libeffectproxy \
     libeffects \
     libinput \
@@ -128,6 +127,11 @@ PRODUCT_PACKAGES += \
     vdc \
     vold \
     wm
+
+ifneq ($(filter nougat_shamu,$(TARGET_PRODUCT)),)
+PRODUCT_PACKAGES += \
+    libdrmclearkeyplugin 
+endif
 
 
 PRODUCT_COPY_FILES := $(call add-to-product-copy-files-if-exists,\
