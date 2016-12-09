@@ -109,7 +109,6 @@ BUILD_NOTICE_FILE := $(BUILD_SYSTEM)/notice_files.mk
 BUILD_HOST_DALVIK_JAVA_LIBRARY := $(BUILD_SYSTEM)/host_dalvik_java_library.mk
 BUILD_HOST_DALVIK_STATIC_JAVA_LIBRARY := $(BUILD_SYSTEM)/host_dalvik_static_java_library.mk
 
-
 # ###############################################################
 # Parse out any modifier targets.
 # ###############################################################
@@ -659,8 +658,7 @@ GLOBAL_CFLAGS_NO_OVERRIDE := \
 
 GLOBAL_CLANG_CFLAGS_NO_OVERRIDE := \
     -Werror=address-of-temporary \
-    -Werror=null-dereference \
-    -Werror=return-type \
+    -Werror=return-type
 
 GLOBAL_CPPFLAGS_NO_OVERRIDE :=
 
