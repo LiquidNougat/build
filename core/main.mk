@@ -428,6 +428,7 @@ endif
 
 BUILD_WITHOUT_PV := true
 
+ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.verify-bytecode=false
 ADDITIONAL_BUILD_PROPERTIES += net.bt.name=Android
 
 # enable vm tracing in files for now to help track
