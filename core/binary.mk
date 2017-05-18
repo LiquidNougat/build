@@ -48,7 +48,6 @@ endif
 #################
 # STRICT_ALIASING
 #################
-ifeq ($(STRICT_ALIASING),true)
 ifeq (1,$(words $(filter $(LOCAL_FORCE_DISABLE_STRICT),$(LOCAL_MODULE))))
 ifdef LOCAL_CONLYFLAGS
 LOCAL_CONLYFLAGS += \
@@ -63,7 +62,6 @@ LOCAL_CPPFLAGS += \
 else
 LOCAL_CPPFLAGS := \
 	$(DISABLE_STRICT)
-endif
 endif
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_STRICT),$(LOCAL_MODULE))))
 ifdef LOCAL_CONLYFLAGS
@@ -110,88 +108,6 @@ LOCAL_CPPFLAGS := \
 endif
 endif
 endif
-#####
-
-###############
-# KRAIT_TUNINGS
-###############
-ifeq ($(KRAIT_TUNINGS),true)
-ifndef LOCAL_IS_HOST_MODULE
-ifneq (1,$(words $(filter $(LOCAL_DISABLE_KRAIT), $(LOCAL_MODULE))))
-ifdef LOCAL_CONLYFLAGS
-LOCAL_CONLYFLAGS += \
-	$(KRAIT_FLAGS)
-else
-LOCAL_CONLYFLAGS := \
-	$(KRAIT_FLAGS)
-endif
-ifdef LOCAL_CPPFLAGS
-LOCAL_CPPFLAGS += \
-	$(KRAIT_FLAGS)
-else
-LOCAL_CPPFLAGS := \
-	$(KRAIT_FLAGS)
-endif
-endif
-endif
-endif
-#####
-
-################
-# ENABLE_GCCONLY
-################
-ifeq ($(ENABLE_GCCONLY),true)
-ifndef LOCAL_IS_HOST_MODULE
-ifeq ($(LOCAL_CLANG),)
-ifneq (1,$(words $(filter $(LOCAL_DISABLE_GCCONLY), $(LOCAL_MODULE))))
-ifdef LOCAL_CONLYFLAGS
-LOCAL_CONLYFLAGS += \
-	$(GCC_ONLY)
-else
-LOCAL_CONLYFLAGS := \
-	$(GCC_ONLY)
-endif
-ifdef LOCAL_CPPFLAGS
-LOCAL_CPPFLAGS += \
-	$(GCC_ONLY)
-else
-LOCAL_CPPFLAGS := \
-	$(GCC_ONLY)
-endif
-endif
-endif
-endif
-endif
-#####
-
-###############
-# GRAPHITE_OPTS
-###############
-ifeq ($(GRAPHITE_OPTS),true)
-ifndef LOCAL_IS_HOST_MODULE
-ifeq ($(LOCAL_CLANG),)
-ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE), $(LOCAL_MODULE))))
-ifdef LOCAL_CONLYFLAGS
-LOCAL_CONLYFLAGS += \
-	$(GRAPHITE_FLAGS)
-else
-LOCAL_CONLYFLAGS := \
-	$(GRAPHITE_FLAGS)
-endif
-
-ifdef LOCAL_CPPFLAGS
-LOCAL_CPPFLAGS += \
-	$(GRAPHITE_FLAGS)
-else
-LOCAL_CPPFLAGS := \
-	$(GRAPHITE_FLAGS)
-endif
-endif
-endif
-endif
-endif
-#####
-
 # The following LOCAL_ variables will be modified in this file.
 # Because the same LOCAL_ variables may be used to define modules for both 1st arch and 2nd arch,
 # we can't modify them in place.
