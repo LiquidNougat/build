@@ -30,8 +30,7 @@ LOCAL_DISABLE_STRICT := \
 	libpdfiumcore \
 	libandroid_runtime \
 	libmedia \
-	libpdfiumcore \
-	libpdfium \
+	libpdfium% \
 	bluetooth.default \
 	logd \
 	mdnsd \
